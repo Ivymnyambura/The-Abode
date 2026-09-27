@@ -1,122 +1,177 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+import { useEffect } from "react";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  useEffect(() => {
+    const sections = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+
+    return () => observer.disconnect();
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+    <main>
+      {/* NAVIGATION */}
+      <header className="navbar">
+        <div className="nav-inner">
+          <button
+            className="logo"
+            onClick={() => scrollToSection("home")}
+          >
+            The Abode
+          </button>
+
+          <nav className="nav-links">
+            <button onClick={() => scrollToSection("story")}>
+              Our Story
+            </button>
+
+            <button onClick={() => scrollToSection("rooms")}>
+              Rooms
+            </button>
+
+            <button onClick={() => scrollToSection("amenities")}>
+              Amenities
+            </button>
+
+            <button onClick={() => scrollToSection("reviews")}>
+              Reviews
+            </button>
+
+            <button onClick={() => scrollToSection("contact")}>
+              Contact
+            </button>
+          </nav>
+
+          <button
+            className="availability-button"
+            onClick={() => scrollToSection("booking")}
+          >
+            Request Availability
+            <span>⌁</span>
+          </button>
         </div>
-        <div>
-          <h1>Get started</h1>
+      </header>
+
+      {/* HERO */}
+      <section id="home" className="hero">
+        <div className="hero-overlay" />
+
+        <div className="hero-content reveal">
+          <h1>
+            Escape for a while,
+            <br />
+            without leaving
+            <br />
+            the comfort of
+            <br />
+            home behind.
+          </h1>
+
           <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
+            A private retreat surrounded by nature, where you can slow
+            down, reconnect, and enjoy every moment of your stay.
           </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
 
-      <div className="ticks"></div>
+          <div className="hero-buttons">
+            <button
+              className="availability-button"
+              onClick={() => scrollToSection("booking")}
+            >
+              Request Availability
+              <span>⌁</span>
+            </button>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+            <button
+              className="secondary-button"
+              onClick={() => scrollToSection("rooms")}
+            >
+              Explore the Space
+              <span>↗</span>
+            </button>
+          </div>
         </div>
       </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {/* BOOKING INQUIRIES */}
+      <section id="booking" className="booking-section reveal">
+        <div className="booking-content">
+          <div>
+            <span className="eyebrow">BOOKING INQUIRIES</span>
+
+            <h2>Tell us when you'd like to stay.</h2>
+
+            <p>
+              Share your preferred dates, guest count, and room preference.
+              The Abode will reply personally to confirm availability.
+            </p>
+          </div>
+
+          <div className="booking-action">
+            <button
+              className="secondary-button"
+              onClick={() => scrollToSection("rooms")}
+            >
+              Explore Rooms
+              <span>⌂</span>
+            </button>
+
+            <p>
+              Browse the rooms first, then send
+              <br />
+              an inquiry when you're ready.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* TEMPORARY SECTIONS */}
+      <section id="story" className="placeholder-section reveal">
+        <span className="eyebrow">OUR STORY</span>
+        <h2>A place to slow down.</h2>
+      </section>
+
+      <section id="rooms" className="placeholder-section reveal">
+        <span className="eyebrow">ROOMS</span>
+        <h2>Stay awhile.</h2>
+      </section>
+
+      <section id="amenities" className="placeholder-section reveal">
+        <span className="eyebrow">AMENITIES</span>
+        <h2>Everything you need.</h2>
+      </section>
+
+      <section id="reviews" className="placeholder-section reveal">
+        <span className="eyebrow">REVIEWS</span>
+        <h2>Words from our guests.</h2>
+      </section>
+
+      <section id="contact" className="placeholder-section reveal">
+        <span className="eyebrow">CONTACT</span>
+        <h2>We'd love to hear from you.</h2>
+      </section>
+    </main>
+  );
 }
 
-export default App
+export default App;

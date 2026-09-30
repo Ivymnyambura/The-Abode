@@ -1,5 +1,8 @@
 import { useEffect } from "react";
+import reception from "./assets/landing page bg.jpeg";
 import "./App.css";
+
+
 
 function App() {
   useEffect(() => {
@@ -146,10 +149,39 @@ function App() {
       </section>
 
       {/* TEMPORARY SECTIONS */}
-      <section id="story" className="placeholder-section reveal">
-        <span className="eyebrow">OUR STORY</span>
-        <h2>A place to slow down.</h2>
-      </section>
+      <section id="story" className="story-section">
+  <div className="story-image reveal">
+    <img
+      src={reception}
+      alt="The Abode interior"
+    />
+  </div>
+
+  <div className="story-content reveal">
+    <p className="section-label">OUR STORY</p>
+
+    <h2>
+      A peaceful retreat
+      <br />
+      created from
+      <br />
+      the smallest
+      <br />
+      thoughtful details.
+    </h2>
+
+    <p>
+      The Abode began with a simple wish: to create a place where
+      people could step away from the pace of everyday life.
+    </p>
+
+    <p>
+      Here, you will find a room that feels private, a natural
+      setting that feels peaceful, and all the essential comforts
+      needed to enjoy meaningful time with the people you love.
+    </p>
+  </div>
+</section>
 
       <section id="rooms" className="placeholder-section reveal">
         <span className="eyebrow">ROOMS</span>

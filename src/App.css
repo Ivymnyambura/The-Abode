@@ -110,7 +110,7 @@ button {
 
   position: relative;
 
-  background-image: url("./assets/hero.png");
+  background-image: url("./assets/landing page bg.jpeg");
   background-size: cover;
   background-position: center;
 
@@ -385,5 +385,133 @@ button {
   .placeholder-section {
     min-height: 500px;
     padding: 80px 24px;
+  }
+}
+/* OUR STORY */
+
+.story-section {
+  min-height: 100vh;
+  padding: 120px 10%;
+  background: #f5f1e8;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 7%;
+  align-items: center;
+}
+
+.story-image {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 24px;
+}
+
+.story-image img {
+  width: 100%;
+  height: 620px;
+  object-fit: cover;
+  display: block;
+
+  transition: transform 0.8s ease;
+}
+
+.story-image:hover img {
+  transform: scale(1.02);
+}
+
+.story-content {
+  max-width: 600px;
+}
+
+.section-label {
+  margin: 0 0 24px;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: #cc7048;
+}
+
+.story-content h2 {
+  margin: 0 0 32px;
+
+  font-family: "DM Serif Display", serif;
+  font-size: clamp(48px, 5vw, 76px);
+  line-height: 0.97;
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  color: #171512;
+}
+
+.story-content > p:not(.section-label) {
+  max-width: 570px;
+  margin: 0 0 24px;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+  color: #666158;
+}
+
+/* Story scroll transition */
+
+.story-section .story-image {
+  transition:
+    opacity 0.9s ease,
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.story-section .story-content {
+  transition:
+    opacity 0.9s ease 0.15s,
+    transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.story-section .reveal {
+  opacity: 0;
+  transform: translateY(45px);
+}
+
+.story-section .reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media (max-width: 900px) {
+  .story-section {
+    grid-template-columns: 1fr;
+    gap: 50px;
+    padding: 100px 7%;
+  }
+
+  .story-image img {
+    height: 520px;
+  }
+
+  .story-content {
+    max-width: 700px;
+  }
+}
+
+@media (max-width: 600px) {
+  .story-section {
+    padding: 80px 6%;
+    gap: 40px;
+  }
+
+  .story-image {
+    border-radius: 18px;
+  }
+
+  .story-image img {
+    height: 420px;
+  }
+
+  .story-content h2 {
+    font-size: 48px;
+  }
+
+  .story-content > p:not(.section-label) {
+    font-size: 14px;
   }
 }

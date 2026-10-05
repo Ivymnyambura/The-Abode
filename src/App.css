@@ -515,3 +515,680 @@ button {
     font-size: 14px;
   }
 }
+/* =========================
+   WHY GUESTS LOVE STAYING HERE
+========================= */
+
+.why-stay-section {
+  min-height: 100vh;
+  padding: 110px 6%;
+  background: #f5f1e8;
+}
+
+.why-stay-header {
+  margin-bottom: 60px;
+}
+
+.why-stay-header h2 {
+  margin: 0;
+  max-width: 900px;
+  font-family: "DM Serif Display", serif;
+  font-size: clamp(52px, 6vw, 82px);
+  line-height: 0.98;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  color: #171512;
+}
+
+.why-stay-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  align-items: start;
+}
+.why-stay-label {
+  margin: 0 0 18px;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+
+  color: #c96f4a;
+}
+
+.why-card {
+  min-height: 310px;
+  padding: 38px 28px 30px;
+ 
+
+  background: #ffffff;
+  border: 1px solid #d8d0c3;
+  border-top: 3px solid #c96f4a;
+  border-radius: 24px;
+
+  display: flex;
+  flex-direction: column;
+
+  transition:
+    transform 0.35s ease,
+    box-shadow 0.35s ease;
+}
+
+.why-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(60, 48, 35, 0.08);
+}
+
+.why-icon {
+  width: 80px;
+  height: 80px;
+  margin-bottom: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.why-icon svg {
+  width: 74px;
+  height: 74px;
+  fill: none;
+  stroke: #c96f4a;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.why-card h3 {
+  margin: 0 0 18px;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 18px;
+  line-height: 1.35;
+  font-weight: 700;
+
+  color: #2f2922;
+}
+
+.why-card p {
+  margin: 0;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+
+  color: #716b63;
+}
+
+/* Fourth card starts a new row,
+   matching the reference */
+.why-card:nth-child(4) {
+  grid-column: 1;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+  .why-stay-section {
+    padding: 90px 7%;
+  }
+
+  .why-stay-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .why-card:nth-child(4) {
+    grid-column: auto;
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .why-stay-section {
+    padding: 80px 6%;
+  }
+
+  .why-stay-header {
+    margin-bottom: 40px;
+  }
+
+  .why-stay-header h2 {
+    font-size: 48px;
+  }
+
+  .why-stay-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .why-card {
+    min-height: auto;
+    padding: 32px 24px 28px;
+    border-radius: 20px;
+  }
+
+  .why-card:nth-child(4) {
+    grid-column: auto;
+  }
+}
+
+/* =========================
+   ROOMS
+========================= */
+
+.rooms-section {
+  min-height: 100vh;
+  padding: 110px 6%;
+  background: #f5f1e8;
+}
+
+.rooms-header {
+  margin-bottom: 60px;
+}
+
+.rooms-label {
+  margin: 0 0 20px;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+
+  color: #c96f4a;
+}
+
+.rooms-header h2 {
+  margin: 0;
+
+  max-width: 850px;
+
+  font-family: "DM Serif Display", serif;
+  font-size: clamp(50px, 6vw, 82px);
+  line-height: 0.98;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+
+  color: #171512;
+}
+
+.rooms-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.room-card {
+  overflow: hidden;
+
+  background: #ffffff;
+
+  border: 1px solid #d8d0c3;
+  border-radius: 24px;
+
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.4s ease,
+    border-color 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.room-card:hover {
+  transform: translateY(-8px);
+
+  background: #eee7da;
+
+  border-color: #cdbfae;
+
+  box-shadow: 0 18px 40px rgba(60, 48, 35, 0.09);
+}
+
+.room-image {
+  margin: 14px;
+  height: 290px;
+
+  overflow: hidden;
+
+  border-radius: 17px;
+}
+
+.room-image img {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.room-card:hover .room-image img {
+  transform: scale(1.045);
+}
+
+.room-info {
+  padding: 10px 28px 28px;
+}
+
+.room-info h3 {
+  margin: 0 0 18px;
+
+  font-family: "DM Serif Display", serif;
+  font-size: 28px;
+  line-height: 1.1;
+  font-weight: 400;
+
+  color: #29231e;
+
+  transition: color 0.3s ease;
+}
+
+.room-card:hover .room-info h3 {
+  color: #c96f4a;
+}
+
+.room-info p {
+  margin: 0 0 22px;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+
+  color: #716b63;
+}
+
+.room-bottom {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+}
+
+.room-price {
+  font-family: "Manrope", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+
+  color: #c96f4a;
+}
+
+.room-link {
+  padding: 0;
+
+  border: none;
+  background: transparent;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+
+  color: #3e5147;
+
+  cursor: pointer;
+
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.room-link::after {
+  content: "";
+
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+
+  width: 100%;
+  height: 1px;
+
+  background: #c96f4a;
+
+  transform: scaleX(0);
+  transform-origin: right;
+
+  transition: transform 0.35s ease;
+}
+
+.room-link:hover {
+  color: #c96f4a;
+}
+
+.room-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+  .rooms-section {
+    padding: 90px 7%;
+  }
+
+  .rooms-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .room-card:last-child {
+    grid-column: 1 / -1;
+    max-width: calc(50% - 12px);
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .rooms-section {
+    padding: 80px 6%;
+  }
+
+  .rooms-header {
+    margin-bottom: 40px;
+  }
+
+  .rooms-header h2 {
+    font-size: 48px;
+  }
+
+  .rooms-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .room-card:last-child {
+    grid-column: auto;
+    max-width: none;
+  }
+
+  .room-image {
+    height: 260px;
+  }
+
+  .room-info {
+    padding: 8px 24px 26px;
+  }
+}
+
+/* =========================
+   LOCATION
+========================= */
+
+.location-section {
+  min-height: 100vh;
+  padding: 110px 6%;
+  background: #e9decc;
+}
+
+.location-header {
+  display: grid;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: 8%;
+  align-items: end;
+
+  margin-bottom: 60px;
+}
+
+.location-label {
+  margin: 0 0 20px;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+
+  color: #c96f4a;
+}
+
+.location-header h2 {
+  margin: 0;
+
+  max-width: 850px;
+
+  font-family: "DM Serif Display", serif;
+  font-size: clamp(48px, 5.5vw, 76px);
+  line-height: 0.98;
+  font-weight: 400;
+  letter-spacing: -0.04em;
+
+  color: #171512;
+}
+
+.location-intro {
+  max-width: 360px;
+
+  margin: 0 0 8px;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 15px;
+  line-height: 1.8;
+
+  color: #716b63;
+}
+
+
+/* =========================
+   MAP
+========================= */
+
+.location-map-wrapper {
+  position: relative;
+
+  width: 100%;
+  height: 560px;
+
+  overflow: hidden;
+
+  border-radius: 32px;
+
+  background: #d8cdbb;
+
+  box-shadow:
+    0 18px 50px rgba(60, 48, 35, 0.08);
+}
+
+.location-map-wrapper iframe {
+  width: 100%;
+  height: 100%;
+
+  display: block;
+
+  border: 0;
+
+  filter: sepia(10%) saturate(75%);
+}
+
+
+/* =========================
+   MAP INFORMATION CARD
+========================= */
+
+.location-card {
+  position: absolute;
+
+  top: 28px;
+  left: 28px;
+
+  max-width: 280px;
+
+  padding: 22px 24px;
+
+  background: rgba(250, 247, 240, 0.95);
+
+  border: 1px solid rgba(216, 208, 195, 0.9);
+
+  border-radius: 18px;
+
+  box-shadow:
+    0 12px 30px rgba(60, 48, 35, 0.12);
+
+  backdrop-filter: blur(8px);
+}
+
+.location-card-label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+
+  color: #c96f4a;
+}
+
+.location-card h3 {
+  margin: 0 0 8px;
+
+  font-family: "DM Serif Display", serif;
+  font-size: 27px;
+  font-weight: 400;
+
+  color: #29231e;
+}
+
+.location-card p {
+  margin: 0;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 13px;
+  line-height: 1.6;
+
+  color: #716b63;
+}
+
+
+/* =========================
+   GOOGLE MAPS BUTTON
+========================= */
+
+.maps-button {
+  position: absolute;
+
+  left: 28px;
+  bottom: 28px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 18px;
+
+  padding: 16px 20px;
+
+  background: #ffffff;
+
+  border: 1px solid #d8d0c3;
+  border-radius: 14px;
+
+  color: #29231e;
+
+  text-decoration: none;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+
+  box-shadow:
+    0 10px 25px rgba(60, 48, 35, 0.12);
+
+  transition:
+    background-color 0.35s ease,
+    color 0.35s ease,
+    transform 0.35s ease,
+    border-color 0.35s ease;
+}
+
+.maps-button span {
+  font-size: 18px;
+
+  transition:
+    transform 0.35s ease;
+}
+
+.maps-button:hover {
+  background: #eee4d4;
+
+  border-color: #cdbfae;
+
+  color: #c96f4a;
+
+  transform: translateY(-3px);
+}
+
+.maps-button:hover span {
+  transform: translate(3px, -3px);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 900px) {
+  .location-section {
+    padding: 90px 7%;
+  }
+
+  .location-header {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .location-intro {
+    max-width: 600px;
+  }
+
+  .location-map-wrapper {
+    height: 500px;
+  }
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .location-section {
+    padding: 80px 6%;
+  }
+
+  .location-header {
+    margin-bottom: 40px;
+  }
+
+  .location-header h2 {
+    font-size: 46px;
+  }
+
+  .location-map-wrapper {
+    height: 520px;
+    border-radius: 22px;
+  }
+
+  .location-card {
+    top: 18px;
+    left: 18px;
+    right: 18px;
+
+    max-width: none;
+  }
+
+  .maps-button {
+    left: 18px;
+    bottom: 18px;
+  }
+}

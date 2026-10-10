@@ -520,11 +520,93 @@ function App() {
         <h2>Everything you need.</h2>
       </section>
 
-      {/* REVIEWS */}
-      <section id="reviews" className="placeholder-section reveal">
-        <span className="eyebrow">REVIEWS</span>
-        <h2>Words from our guests.</h2>
-      </section>
+      
+      
+{/* GUEST REVIEWS */}
+<section id="reviews" className="reviews-section">
+  <div className="reviews-header reveal">
+    <span className="eyebrow reviews-eyebrow">
+      THE ABODE EXPERIENCE
+    </span>
+
+    <h2>Stories that began right here.</h2>
+
+    <div className="reviews-subtitle">
+      <span className="reviews-line"></span>
+      <p>Little moments. Lasting memories.</p>
+      <span className="reviews-line"></span>
+    </div>
+  </div>
+
+  <article className="review-card review-featured reveal">
+    <span className="review-quote-mark" aria-hidden="true">“</span>
+
+    <div className="review-stars" aria-label="4 out of 5 stars">
+      {[1, 2, 3, 4].map((star) => (
+        <span key={star} aria-hidden="true">★</span>
+      ))}
+    </div>
+
+    <blockquote>
+      “The room was clean, bright, and even more peaceful than it
+      looked in the photos. The host was incredibly helpful and
+      shared a full list of great local restaurants.”
+    </blockquote>
+
+    <div className="review-author-row">
+      <span className="review-author-avatar">M</span>
+      <div>
+        <p className="review-author">Mary Wanjiru Mbatia</p>
+        <span className="review-author-label">Guest experience</span>
+      </div>
+    </div>
+  </article>
+
+  <div className="reviews-grid">
+    <article className="review-card reveal">
+      <div className="review-stars" aria-label="4 out of 5 stars">
+        {[1, 2, 3, 4].map((star) => (
+          <span key={star} aria-hidden="true">★</span>
+        ))}
+      </div>
+
+      <blockquote>
+        “Our family had such a relaxing weekend. Our child loved
+        the garden, while we finally had time to slow down and rest.”
+      </blockquote>
+
+      <div className="review-author-row">
+        <span className="review-author-avatar">J</span>
+        <div>
+          <p className="review-author">John &amp; Jane Mathenge</p>
+          <span className="review-author-label">Guest experience</span>
+        </div>
+      </div>
+    </article>
+
+    <article className="review-card reveal">
+      <div className="review-stars" aria-label="4 out of 5 stars">
+        {[1, 2, 3, 4].map((star) => (
+          <span key={star} aria-hidden="true">★</span>
+        ))}
+      </div>
+
+      <blockquote>
+        “A wonderful place for couples. It felt private, the balcony
+        was beautiful, and the evenings were exceptionally peaceful.”
+      </blockquote>
+
+      <div className="review-author-row">
+        <span className="review-author-avatar">L</span>
+        <div>
+          <p className="review-author">Lisah Gitau</p>
+          <span className="review-author-label">Guest experience</span>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
 
       {/* CONTACT */}
       <section id="contact" className="placeholder-section reveal">

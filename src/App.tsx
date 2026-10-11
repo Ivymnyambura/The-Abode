@@ -2,7 +2,21 @@ import { useEffect, useMemo, useState } from "react";
 import reception from "./assets/landing page bg.jpeg";
 import room from "./assets/room 1 pic.jpeg";
 import "./App.css";
-import abodeLogo from "./assets/The Abode (original) logo.jpeg";
+import abodeLogo from "./assets/The Abode (original) logo.png";
+import {
+  ArrowUpRight,
+ 
+} from "lucide-react";
+
+import {
+  FaInstagram,
+  FaFacebookF,
+  FaTiktok,
+  FaWhatsapp,
+} from "react-icons/fa6";
+
+const whatsappUrl =
+  "https://wa.me/254711308481?text=Hello%20The%20Abode%2C%20I%20would%20like%20to%20make%20an%20inquiry.";
 
 type Room = {
   id: string;
@@ -47,11 +61,43 @@ const rooms: Room[] = [
   },
 ];
 
+const faqs = [
+  {
+    question: "Is the homestay suitable for children?",
+    answer:
+      "Yes. We offer rooms suitable for small families and can provide selected child-friendly amenities. Please let us know in advance so we can prepare for your stay.",
+  },
+  {
+    question: "Is car parking available?",
+    answer:
+      "Please contact our team before your arrival to confirm parking availability and any arrangements you may need.",
+  },
+  {
+    question: "Can I check in early?",
+    answer:
+      "Early check-in may be possible depending on room availability. Please contact us in advance and we will do our best to accommodate your request.",
+  },
+  {
+    question: "Are pets allowed?",
+    answer:
+      "Please contact us before booking to confirm our current pet policy and whether any special arrangements can be made.",
+  },
+  {
+    question: "Can I cancel or change my booking dates?",
+    answer:
+      "Booking changes and cancellations depend on the terms of your reservation. Please contact us with your booking details for assistance.",
+  },
+];
+
+
 function App() {
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [bookingStep, setBookingStep] = useState<"stay" | "details" | "summary">(
     "stay"
   );
+  
+  const [openFaq, setOpenFaq] = useState<number | null>(0);
+ 
 
   const [checkIn, setCheckIn] = useState("");
   const [checkOut, setCheckOut] = useState("");
@@ -351,7 +397,11 @@ function App() {
                     }}
                   >
                     Book
-                    <span>↗</span>
+<ArrowUpRight
+  size={16}
+  strokeWidth={1.25}
+  aria-hidden="true"
+/>
                   </button>
                 </div>
               </div>
@@ -514,11 +564,103 @@ function App() {
   </div>
 </section>
 
-      {/* AMENITIES */}
-      <section id="amenities" className="placeholder-section reveal">
-        <span className="eyebrow">AMENITIES</span>
-        <h2>Everything you need.</h2>
-      </section>
+      
+{/* AMENITIES */}
+<section id="amenities" className="amenities-section">
+  <div className="amenities-container">
+
+    <div className="amenities-heading">
+      <span className="amenities-eyebrow">
+        THE LITTLE EXTRAS
+      </span>
+
+      <h2>
+        Everything you need for a
+        <em> comfortable stay.</em>
+      </h2>
+
+      <p>
+        From everyday essentials to thoughtful services,
+        every detail is designed to make your stay
+        feel a little more like home.
+      </p>
+    </div>
+
+    <div className="amenities-list">
+
+      <div className="amenity-row">
+        <span className="amenity-number">01</span>
+
+        <div className="amenity-content">
+          <div className="amenity-title">
+            <span className="amenity-icon">⌂</span>
+            <h3>In Your Room</h3>
+          </div>
+
+          <p>
+            Air conditioning <span>·</span> High-speed Wi-Fi
+            <span> · </span> Smart TV <span> · </span>
+            Hot water <span> · </span> Balcony
+            <span> · </span> Work desk
+          </p>
+        </div>
+
+        <span className="amenity-arrow">
+  <ArrowUpRight size={20} strokeWidth={1.7} />
+</span>
+      </div>
+
+      <div className="amenity-row">
+        <span className="amenity-number">02</span>
+
+        <div className="amenity-content">
+          <div className="amenity-title">
+            <span className="amenity-icon">✳</span>
+            <h3>Shared Spaces</h3>
+          </div>
+
+          <p>
+            Restaurant <span> · </span> Parking
+            <span> · </span> Rooftop
+          </p>
+        </div>
+
+        <span className="amenity-arrow">
+  <ArrowUpRight size={20} strokeWidth={1.7} />
+</span>
+      </div>
+
+      <div className="amenity-row">
+        <span className="amenity-number">03</span>
+
+        <div className="amenity-content">
+          <div className="amenity-title">
+            <span className="amenity-icon">✦</span>
+            <h3>Guest Services</h3>
+          </div>
+
+          <p>
+            Flexible check-in <span> · </span>
+            Fully operational restaurant <span> · </span>
+            Housekeeping <span> · </span>
+            Local itinerary assistance
+          </p>
+        </div>
+
+        <span className="amenity-arrow">
+  <ArrowUpRight size={20} strokeWidth={1.7} />
+</span>
+      </div>
+
+    </div>
+
+    <div className="amenities-footer">
+      
+    </div>
+
+  </div>
+</section>
+
 
       
       
@@ -608,11 +750,508 @@ function App() {
 </section>
 
 
+{/* QUERIES ANSWERED / FAQ */}
+<section id="faq" className="faq-section">
+  <div className="faq-layout">
+
+    {/* LEFT SIDE */}
+    <div className="faq-intro">
+      <span className="faq-eyebrow">GOOD TO KNOW</span>
+
+      <h2>A few things you may want to know.</h2>
+
+      <p className="faq-description">
+        Planning a stay should feel simple. Browse the most
+        common questions, or contact us directly if you would
+        like personal help.
+      </p>
+
+      <div className="faq-image-wrap">
+        <img
+          src={room}
+          alt="Comfortable guest bedroom at The Abode"
+          loading="lazy"
+        />
+      </div>
+    </div>
+
+    {/* RIGHT SIDE */}
+    <div className="faq-list">
+      {faqs.map((faq, index) => {
+        const isOpen = openFaq === index;
+
+        return (
+          <div
+            className={`faq-item ${isOpen ? "faq-item-open" : ""}`}
+            key={faq.question}
+          >
+            <h3 className="faq-question-heading">
+              <button
+                type="button"
+                className="faq-question"
+                aria-expanded={isOpen}
+                aria-controls={`faq-answer-${index}`}
+                onClick={() =>
+                  setOpenFaq(isOpen ? null : index)
+                }
+              >
+                <span className="faq-number">
+                  {String(index + 1).padStart(2, "0")}
+                </span>
+
+                <span className="faq-question-text">
+                  {faq.question}
+                </span>
+
+                <span className="faq-toggle" aria-hidden="true">
+                  {isOpen ? "×" : "+"}
+                </span>
+              </button>
+            </h3>
+
+            <div
+              id={`faq-answer-${index}`}
+              className="faq-answer"
+              hidden={!isOpen}
+            >
+              <p>{faq.answer}</p>
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  </div>
+</section>
+
+
+
       {/* CONTACT */}
-      <section id="contact" className="placeholder-section reveal">
-        <span className="eyebrow">CONTACT</span>
-        <h2>We'd love to hear from you.</h2>
-      </section>
+      
+{/* CONTACT */}
+<section id="contact" className="contact-section">
+  <div className="contact-shell">
+    <div className="contact-layout">
+
+      {/* LEFT: INTRODUCTION */}
+      <div className="contact-intro">
+        <span className="contact-eyebrow">
+          LET'S PLAN YOUR STAY
+        </span>
+
+        <h2>
+          Your next getaway
+          <em> begins here.</em>
+        </h2>
+
+        <p className="contact-description">
+          A quiet escape, a warm welcome, and a little room
+          to slow down. Tell us when you'd like to visit,
+          and we'll help you plan your stay.
+        </p>
+
+        <div className="contact-details">
+          <a
+            className="contact-detail"
+            href="tel:+254711308481"
+          >
+            <span className="contact-detail-icon">↗</span>
+            <span className="contact-detail-copy">
+              <small>CALL US</small>
+              <strong>+254 711 308 481</strong>
+            </span>
+          </a>
+
+          <a
+            className="contact-detail"
+            href="mailto:contact@theabode.com"
+          >
+            <span className="contact-detail-icon">↗</span>
+            <span className="contact-detail-copy">
+              <small>EMAIL US</small>
+              <strong>contact@theabode.com</strong>
+            </span>
+          </a>
+
+          
+<a
+  className="contact-detail"
+  href={whatsappUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+
+            <span className="contact-detail-icon">↗</span>
+            <span className="contact-detail-copy">
+              <small>WHATSAPP</small>
+              <strong>Start a conversation</strong>
+            </span>
+          </a>
+        </div>
+
+        <div className="contact-signoff">
+          
+        </div>
+      </div>
+
+      {/* RIGHT: INQUIRY FORM */}
+      <div className="contact-form-panel">
+        <div className="contact-form-heading">
+          <span>YOUR STAY, YOUR WAY</span>
+          <h3>Make an inquiry.</h3>
+          <p>
+            Share a few details and we'll help you
+            check availability.
+          </p>
+        </div>
+
+        <form
+          className="contact-form"
+          onSubmit={(event) => {
+            event.preventDefault();
+
+            const form = event.currentTarget;
+            if (!form.reportValidity()) return;
+
+            const data = new FormData(form);
+            const get = (name: string) =>
+              String(data.get(name) ?? "").trim();
+
+            const checkIn = get("checkIn");
+            const checkOut = get("checkOut");
+
+            if (checkOut <= checkIn) {
+              alert(
+                "Check-out must be later than check-in."
+              );
+              return;
+            }
+
+            const subject =
+              "Accommodation Inquiry - The Abode";
+
+            const message = [
+              "Hello The Abode,",
+              "",
+              "I would like to inquire about a stay.",
+              "",
+              `Full name: ${get("fullName")}`,
+              `Phone: ${get("phone")}`,
+              `Email: ${get("email")}`,
+              `Guests: ${get("guests")}`,
+              `Check-in: ${checkIn}`,
+              `Check-out: ${checkOut}`,
+              `Room preference: ${get("room")}`,
+              "",
+              `Additional message: ${get("message") || "None"}`,
+              "",
+              "Please let me know about availability.",
+              "",
+              "Thank you!"
+            ].join("\n");
+
+            window.location.href =
+              `mailto:contact@theabode.com?subject=${
+                encodeURIComponent(subject)
+              }&body=${encodeURIComponent(message)}`;
+          }}
+        >
+          <div className="contact-form-grid">
+            <label className="contact-field">
+              <span>Full Name *</span>
+              <input
+                type="text"
+                name="fullName"
+                placeholder="Your full name"
+                autoComplete="name"
+                required
+              />
+            </label>
+
+            <label className="contact-field">
+              <span>Phone Number *</span>
+              <input
+                type="tel"
+                name="phone"
+                placeholder="+254..."
+                autoComplete="tel"
+                required
+              />
+            </label>
+
+            <label className="contact-field">
+              <span>Email Address *</span>
+              <input
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                autoComplete="email"
+                required
+              />
+            </label>
+
+            <label className="contact-field">
+              <span>Number of Guests *</span>
+              <input
+                type="number"
+                name="guests"
+                placeholder="2"
+                min="1"
+                max="20"
+                required
+              />
+            </label>
+
+            <label className="contact-field">
+              <span>Check-in Date *</span>
+              <input
+                type="date"
+                name="checkIn"
+                min={new Date().toLocaleDateString(
+                  "en-CA"
+                )}
+                required
+              />
+            </label>
+
+            <label className="contact-field">
+              <span>Check-out Date *</span>
+              <input
+                type="date"
+                name="checkOut"
+                min={new Date().toLocaleDateString(
+                  "en-CA"
+                )}
+                required
+              />
+            </label>
+
+            <label className="contact-field contact-field-full">
+              <span>Room Preference</span>
+              <select name="room" defaultValue="No preference">
+                <option>No preference</option>
+                <option>Balcony Room</option>
+                <option>Standard Room</option>
+                <option>Deluxe Room</option>
+              </select>
+            </label>
+
+            <label className="contact-field contact-field-full">
+              <span>Anything else?</span>
+              <textarea
+                name="message"
+                rows={4}
+                placeholder="Tell us anything that would make your stay more special..."
+              />
+            </label>
+          </div>
+
+          <button
+            type="submit"
+            className="contact-submit"
+          >
+            Send Inquiry
+<ArrowUpRight
+  size={16}
+  strokeWidth={1.25}
+  aria-hidden="true"
+/>
+          </button>
+
+          
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+{/* FOOTER */}
+<footer className="abode-footer">
+  <div className="footer-container">
+
+    <div className="footer-main">
+      <div className="footer-brand">
+        <button
+          type="button"
+          className="footer-logo-button"
+          onClick={() =>
+            document.getElementById("home")?.scrollIntoView({
+              behavior: "smooth"
+            })
+          }
+          aria-label="The Abode - Back to top"
+        >
+          <img
+            src={abodeLogo}
+            alt="The Abode"
+            className="footer-logo-image"
+          />
+        </button>
+
+        <p className="footer-tagline">
+          Refined Hospitality.
+        </p>
+
+        <span className="footer-brand-caption">
+          Tembea Vasha.
+        </span>
+      </div>
+
+      <div className="footer-navigation">
+        <div className="footer-column">
+          <h3>EXPLORE</h3>
+
+          <button
+            onClick={() =>
+              document.getElementById("story")?.scrollIntoView({
+                behavior: "smooth"
+              })
+            }
+          >
+            Our Story
+          </button>
+
+          <button
+            onClick={() =>
+              document.getElementById("rooms")?.scrollIntoView({
+                behavior: "smooth"
+              })
+            }
+          >
+            Our Rooms
+          </button>
+
+          <button
+            onClick={() =>
+              document.getElementById("amenities")?.scrollIntoView({
+                behavior: "smooth"
+              })
+            }
+          >
+            Amenities
+          </button>
+
+          <button
+            onClick={() =>
+              document.getElementById("faq")?.scrollIntoView({
+                behavior: "smooth"
+              })
+            }
+          >
+            FAQs
+          </button>
+        </div>
+
+        <div className="footer-column">
+          <h3>FIND US</h3>
+
+          <p>Nakuru–Naivasha Highway</p>
+          <p>Kenya</p>
+
+          <a href="tel:+254711308481">
+            +254 711 308 481
+          </a>
+
+          <a href="mailto:contact@theabode.com">
+            contact@theabode.com
+          </a>
+        </div>
+      </div>
+    </div>
+
+    
+
+<div className="footer-socials">
+  <span className="footer-social-label">
+    FOLLOW OUR JOURNEY
+  </span>
+
+  <div className="footer-social-links">
+    <a
+      href="https://www.instagram.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Instagram"
+      title="Instagram"
+    >
+      <FaInstagram size={19} />
+    </a>
+
+    <a
+      href="https://www.facebook.com/"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="Facebook"
+      title="Facebook"
+    >
+      <FaFacebookF size={19} />
+    </a>
+
+    <a
+      href="https://www.tiktok.com/@the.abode.hotel.na?_r=1&_t=ZS-9ASdnh9mr7G"
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label="TikTok"
+      title="TikTok"
+    >
+      <FaTiktok size={19} />
+    </a>
+
+   
+<a
+  href={whatsappUrl}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Chat with The Abode on WhatsApp"
+  title="WhatsApp"
+>
+  <FaWhatsapp size={19} />
+</a>
+
+<a
+  href="https://www.booking.com/hotel/ke/the-abode-naivasha.html"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="footer-booking-link"
+  aria-label="View The Abode on Booking.com"
+  title="Booking.com"
+>
+  Booking.com
+</a>
+
+  </div>
+</div>
+
+
+
+    <div className="footer-bottom">
+      <p>
+        © {new Date().getFullYear()} The Abode.
+        All rights reserved.
+      </p>
+
+      <p>
+        Thoughtfully designed & developed by
+        <span> Ivy Nyambura.</span>
+      </p>
+
+      <button
+        type="button"
+        className="footer-back-top"
+        onClick={() =>
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          })
+        }
+      >
+        Back to top ↑
+      </button>
+    </div>
+  </div>
+</footer>
+
+
 
       {/* BOOKING MODAL */}
       {selectedRoom && (

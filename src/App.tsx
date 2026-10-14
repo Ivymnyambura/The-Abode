@@ -92,6 +92,7 @@ const faqs = [
 
 function App() {
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [bookingStep, setBookingStep] = useState<"stay" | "details" | "summary">(
     "stay"
   );
@@ -160,6 +161,10 @@ function App() {
       behavior: "smooth",
     });
   };
+  const navigateMobile = (id: string) => {
+  setMobileMenuOpen(false);
+  scrollToSection(id);
+};
 
   const openBooking = (roomToBook: Room) => {
     setSelectedRoom(roomToBook);
@@ -222,32 +227,130 @@ function App() {
 
   return (
     <main>
-      {/* NAVIGATION */}
-      <header className="navbar">
-        <div className="nav-inner">
-          <button className="logo" onClick={() => scrollToSection("home")}>
-            <img src={abodeLogo} alt="The Abode" />
-          </button>
+     
+{/* NAVIGATION */}
+<header className="navbar">
+  <div className="nav-inner">
+    {/* LOGO */}
+    <button
+      type="button"
+      className="logo"
+      onClick={() => navigateMobile("home")}
+      aria-label="The Abode — Home"
+    >
+      <img src={abodeLogo} alt="The Abode" />
+    </button>
 
-          <nav className="nav-links">
-            <button onClick={() => scrollToSection("story")}>Our Story</button>
-            <button onClick={() => scrollToSection("rooms")}>Rooms</button>
-            <button onClick={() => scrollToSection("location")}>
-              Location
-            </button>
-            <button onClick={() => scrollToSection("reviews")}>Reviews</button>
-            <button onClick={() => scrollToSection("contact")}>Contact</button>
-          </nav>
+    {/* DESKTOP NAVIGATION */}
+    <nav className="nav-links" aria-label="Main navigation">
+      <button type="button" onClick={() => scrollToSection("story")}>
+        Our Story
+      </button>
+      <button type="button" onClick={() => scrollToSection("rooms")}>
+        Rooms
+      </button>
+      <button type="button" onClick={() => scrollToSection("location")}>
+        Location
+      </button>
+      <button type="button" onClick={() => scrollToSection("reviews")}>
+        Reviews
+      </button>
+      <button type="button" onClick={() => scrollToSection("contact")}>
+        Contact
+      </button>
+    </nav>
 
+    {/* DESKTOP BOOKING BUTTON */}
+    <button
+      type="button"
+      className="availability-button"
+      onClick={() => scrollToSection("rooms")}
+    >
+      Book
+      <span aria-hidden="true"> </span>
+    </button>
+
+    {/* PHONE & TABLET HAMBURGER */}
+    <button
+      type="button"
+      className={`abode-hamburger ${mobileMenuOpen ? "is-open" : ""}`}
+      onClick={() => setMobileMenuOpen((open) => !open)}
+      aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+      aria-expanded={mobileMenuOpen}
+      aria-controls="abode-mobile-menu"
+    >
+      <span />
+      <span />
+      <span />
+    </button>
+  </div>
+
+  {/* PHONE & TABLET NAVIGATION MENU */}
+  <nav
+    id="abode-mobile-menu"
+    className={`abode-mobile-menu ${mobileMenuOpen ? "is-open" : ""}`}
+    aria-label="Mobile navigation"
+    aria-hidden={!mobileMenuOpen}
+    inert={!mobileMenuOpen}
+  >
+    <div className="abode-mobile-menu-inner">
+      <p className="abode-mobile-eyebrow">
+        WELCOME TO THE ABODE
+      </p>
+
+      <div className="abode-mobile-links">
+        {[
+          { label: "Home", id: "home" },
+          { label: "Our Story", id: "story" },
+          { label: "Rooms", id: "rooms" },
+          { label: "Why The Abode", id: "why-stay" },
+          { label: "Amenities", id: "amenities" },
+          { label: "Location", id: "location" },
+          { label: "Reviews", id: "reviews" },
+          { label: "Contact", id: "contact" },
+        ].map((item, index) => (
           <button
-            className="availability-button"
-            onClick={() => scrollToSection("rooms")}
+            key={item.id}
+            type="button"
+            onClick={() => navigateMobile(item.id)}
           >
-             Book
-            <span> </span>
+            <span className="abode-mobile-index">
+              {String(index + 1).padStart(2, "0")}
+            </span>
+
+            <span>{item.label}</span>
+
+            <ArrowUpRight
+              size={18}
+              strokeWidth={1.5}
+              aria-hidden="true"
+            />
           </button>
-        </div>
-      </header>
+        ))}
+      </div>
+
+      {/* MOBILE BOOKING BUTTON */}
+      <button
+        type="button"
+        className="abode-mobile-book"
+        onClick={() => navigateMobile("rooms")}
+      >
+        Book Your Stay
+        <ArrowUpRight
+          size={19}
+          strokeWidth={1.5}
+          aria-hidden="true"
+        />
+      </button>
+
+      {/* BRAND TAGLINE */}
+      <p className="abode-mobile-tagline">
+        Refined Hospitality
+      </p>
+    </div>
+  </nav>
+</header>
+
 
       {/* HERO */}
       <section id="home" className="hero">
@@ -368,10 +471,21 @@ function App() {
         <div className="rooms-grid">
           {rooms.map((roomItem) => (
             <article
-              className="room-card reveal"
-              key={roomItem.id}
-              onClick={() => openBooking(roomItem)}
-            >
+  className="room-card reveal"
+  key={roomItem.id}
+  role="button"
+  tabIndex={0}
+  aria-label={`View ${roomItem.name} and book your stay`}
+  onClick={() => openBooking(roomItem)}
+  onKeyDown={(event) => {
+    if (event.target !== event.currentTarget) return;
+
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      openBooking(roomItem);
+    }
+  }}
+>
               <div className="room-image">
                 <img src={roomItem.image} alt={`The Abode ${roomItem.name}`} />
               </div>
@@ -396,7 +510,7 @@ function App() {
                       openBooking(roomItem);
                     }}
                   >
-                    Book
+                    View & Book
 <ArrowUpRight
   size={16}
   strokeWidth={1.25}
@@ -409,6 +523,50 @@ function App() {
           ))}
         </div>
       </section>
+
+      {/* THE ABODE GALLERY */}
+<section id="gallery" className="abode-gallery-section">
+  <div className="abode-gallery-heading reveal">
+    <div>
+      <p className="abode-gallery-label">A CLOSER LOOK</p>
+      <h2>
+        A glimpse of life
+        <br />
+        at The Abode.
+      </h2>
+    </div>
+
+    <p className="abode-gallery-description">
+      Thoughtful spaces, quiet corners, and the little details
+      that make every stay feel special.
+    </p>
+  </div>
+
+  <div className="abode-gallery-grid">
+    {[
+      { image: reception, label: "A warm welcome" },
+      { image: room, label: "Room to unwind" },
+      { image: reception, label: "The little details" },
+      { image: room, label: "Make yourself at home" },
+    ].map((photo, index) => (
+      <figure
+        className={`abode-gallery-item abode-gallery-item-${index + 1} reveal`}
+        key={index}
+      >
+        <img src={photo.image} alt={photo.label} loading="lazy" />
+
+        <figcaption>
+          <span>{photo.label}</span>
+          <ArrowUpRight size={18} strokeWidth={1.5} aria-hidden="true" />
+        </figcaption>
+      </figure>
+    ))}
+  </div>
+
+  <p className="abode-gallery-signature">
+    The Abode <span>— Refined Hospitality</span>
+  </p>
+</section>
 
       {/* WHY THE ABODE */}
       <section id="why-stay" className="why-stay-section">
@@ -615,7 +773,7 @@ function App() {
 
         <div className="amenity-content">
           <div className="amenity-title">
-            <span className="amenity-icon">✳</span>
+            <span className="amenity-icon"></span>
             <h3>Shared Spaces</h3>
           </div>
 
@@ -635,7 +793,7 @@ function App() {
 
         <div className="amenity-content">
           <div className="amenity-title">
-            <span className="amenity-icon">✦</span>
+            <span className="amenity-icon"></span>
             <h3>Guest Services</h3>
           </div>
 

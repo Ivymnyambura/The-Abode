@@ -1,11 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
-import reception from "./assets/landing page bg.jpeg";
+
+import receptionPhoto from "./assets/reception pic.jpeg";
 import room from "./assets/room 1 pic.jpeg";
+import room2 from "./assets/room 2 pic.jpg";
+import room3 from "./assets/room 3 pic.jpg";
+import bathroom from "./assets/bathroom pic.jpg";
+import restaurant from "./assets/restaurant pic.jpeg";
 import "./App.css";
 import abodeLogo from "./assets/The Abode (original) logo.png";
 import {
   ArrowUpRight,
- 
+  ConciergeBell,
 } from "lucide-react";
 
 import {
@@ -16,7 +21,7 @@ import {
 } from "react-icons/fa6";
 
 const whatsappUrl =
-  "https://wa.me/254711308481?text=Hello%20The%20Abode%2C%20I%20would%20like%20to%20make%20an%20inquiry.";
+  "https://wa.me/254769558594?text=Hello%20The%20Abode%2C%20I%20would%20like%20to%20make%20an%20inquiry.";
 
 type Room = {
   id: string;
@@ -47,7 +52,7 @@ const rooms: Room[] = [
     bed: "1 King bed",
     view: "Private balcony",
     maxGuests: 2,
-    image: room,
+    image: room2,
   },
   {
     id: "deluxe-room",
@@ -57,7 +62,7 @@ const rooms: Room[] = [
     bed: "1 King-size bed",
     view: "Garden surroundings",
     maxGuests: 3,
-    image: room,
+    image: room3,
   },
 ];
 
@@ -223,7 +228,13 @@ function App() {
     guestEmail.trim() &&
     guestPhone.trim();
 
-  const bookingImages = [room, reception, room];
+  const bookingImages = selectedRoom
+  ? selectedRoom.id === "balcony"
+    ? [room, room2, room3]
+    : selectedRoom.id === "standard"
+      ? [room2, room3, room]
+      : [room3, room, room2]
+  : [room, room2, room3];
 
   return (
     <main>
@@ -345,7 +356,7 @@ function App() {
 
       {/* BRAND TAGLINE */}
       <p className="abode-mobile-tagline">
-        Refined Hospitality
+        Redefined Hospitality
       </p>
     </div>
   </nav>
@@ -427,7 +438,7 @@ function App() {
       {/* STORY */}
       <section id="story" className="story-section">
         <div className="story-image reveal">
-          <img src={reception} alt="The Abode interior" />
+          <img src={room2} alt="The Abode interior" />
         </div>
 
         <div className="story-content reveal">
@@ -500,7 +511,7 @@ function App() {
 
                 <div className="room-bottom">
                   <span className="room-price">
-                    {roomItem.maxGuests === 3 ? "Up to 3 guests" : "Up to 2 guests"}
+                    {roomItem.maxGuests === 3 ? "Up to 2 guests" : "Up to 2 guests"}
                   </span>
 
                   <button
@@ -528,7 +539,7 @@ function App() {
 <section id="gallery" className="abode-gallery-section">
   <div className="abode-gallery-heading reveal">
     <div>
-      <p className="abode-gallery-label">A CLOSER LOOK</p>
+      <p className="abode-gallery-label">GALLERY</p>
       <h2>
         A glimpse of life
         <br />
@@ -544,11 +555,11 @@ function App() {
 
   <div className="abode-gallery-grid">
     {[
-      { image: reception, label: "A warm welcome" },
-      { image: room, label: "Room to unwind" },
-      { image: reception, label: "The little details" },
-      { image: room, label: "Make yourself at home" },
-    ].map((photo, index) => (
+  { image: receptionPhoto, label: "A warm welcome" },
+  { image: bathroom, label: "Thoughtful details" },
+  { image: restaurant, label: "Dining at The Abode" },
+  { image: room3, label: "Make yourself at home" },
+].map((photo, index) => (
       <figure
         className={`abode-gallery-item abode-gallery-item-${index + 1} reveal`}
         key={index}
@@ -564,7 +575,7 @@ function App() {
   </div>
 
   <p className="abode-gallery-signature">
-    The Abode <span>— Refined Hospitality</span>
+    The Abode <span>— Redefined Hospitality</span>
   </p>
 </section>
 
@@ -751,7 +762,26 @@ function App() {
 
         <div className="amenity-content">
           <div className="amenity-title">
-            <span className="amenity-icon">⌂</span>
+            <span className="amenity-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M10 4 8 6" />
+            <path d="M17 19v2" />
+            <path d="M2 12h20" />
+            <path d="M7 19v2" />
+            <path d="M9 5 7.621 3.621A2.121 2.121 0 0 0 4 5v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" />
+          </svg>
+        </span>
             <h3>In Your Room</h3>
           </div>
 
@@ -773,7 +803,27 @@ function App() {
 
         <div className="amenity-content">
           <div className="amenity-title">
-            <span className="amenity-icon"></span>
+            <span className="amenity-icon">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth={1.5}
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M20.453 8.911a9 9 0 00-6.696-5.738" />
+            <path d="M21 22a4 4 0 00-8 0" />
+            <path d="M3 12a4 4 0 017.963-.543" />
+            <path d="M3.889 15.9a9 9 0 005.247 4.632" />
+            <circle cx="17" cy="15" r="3" />
+            <circle cx="7" cy="5" r="3" />
+          </svg>
+        </span>
             <h3>Shared Spaces</h3>
           </div>
 
@@ -793,7 +843,14 @@ function App() {
 
         <div className="amenity-content">
           <div className="amenity-title">
-            <span className="amenity-icon"></span>
+            <span className="amenity-icon">
+          <ConciergeBell
+            size={24}
+            strokeWidth={1.5}
+            aria-hidden="true"
+          />
+        </span>
+
             <h3>Guest Services</h3>
           </div>
 
@@ -1010,12 +1067,14 @@ function App() {
         <div className="contact-details">
           <a
             className="contact-detail"
-            href="tel:+254711308481"
+            href="tel:+254708764074"
           >
-            <span className="contact-detail-icon">↗</span>
+            <span className="contact-detail-icon">
+  <ArrowUpRight size={18} strokeWidth={1.5} aria-hidden="true" />
+</span>
             <span className="contact-detail-copy">
               <small>CALL US</small>
-              <strong>+254 711 308 481</strong>
+              <strong>+254 708 764 074</strong>
             </span>
           </a>
 
@@ -1023,7 +1082,9 @@ function App() {
             className="contact-detail"
             href="mailto:contact@theabode.com"
           >
-            <span className="contact-detail-icon">↗</span>
+            <span className="contact-detail-icon">
+  <ArrowUpRight size={18} strokeWidth={1.5} aria-hidden="true" />
+</span>
             <span className="contact-detail-copy">
               <small>EMAIL US</small>
               <strong>contact@theabode.com</strong>
@@ -1038,7 +1099,9 @@ function App() {
   rel="noopener noreferrer"
 >
 
-            <span className="contact-detail-icon">↗</span>
+            <span className="contact-detail-icon">
+  <ArrowUpRight size={18} strokeWidth={1.5} aria-hidden="true" />
+</span>
             <span className="contact-detail-copy">
               <small>WHATSAPP</small>
               <strong>Start a conversation</strong>
@@ -1247,7 +1310,7 @@ function App() {
         </button>
 
         <p className="footer-tagline">
-          Refined Hospitality.
+          Redefined Hospitality.
         </p>
 
         <span className="footer-brand-caption">
@@ -1306,8 +1369,8 @@ function App() {
           <p>Nakuru–Naivasha Highway</p>
           <p>Kenya</p>
 
-          <a href="tel:+254711308481">
-            +254 711 308 481
+          <a href="tel:+254708764074">
+            +254 708 764 074
           </a>
 
           <a href="mailto:contact@theabode.com">

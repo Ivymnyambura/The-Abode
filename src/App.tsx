@@ -1,4 +1,19 @@
 import { useEffect, useMemo, useState } from "react";
+import { createPortal } from "react-dom";
+
+// THE ABODE — NEW EXTERIOR PHOTOGRAPHS
+import exteriorFront from "./assets/Exerior .jpeg";
+import exteriorSide from "./assets/Exerior sideways.jpeg";
+import exteriorNight from "./assets/exterior night.jpeg";
+
+// THE ABODE — ADDITIONAL ROOM PHOTOGRAPHS
+import anotherRoom from "./assets/another room.jpeg";
+import towelFoldRoom from "./assets/towel fold room.jpeg";
+import roomTv from "./assets/Tv in rooms.jpeg";
+import roomNight from "./assets/room night.jpeg";
+import prettyRoom from "./assets/pretty room.jpeg";
+import roomEntrance from "./assets/room entrance.jpeg";
+
 
 import receptionPhoto from "./assets/reception pic.jpeg";
 import room from "./assets/room 1 pic.jpeg";
@@ -11,6 +26,10 @@ import abodeLogo from "./assets/The Abode (original) logo.png";
 import {
   ArrowUpRight,
   ConciergeBell,
+  ChevronLeft,
+  ChevronRight,
+  X,
+  ShieldCheck,
 } from "lucide-react";
 
 import {
@@ -95,7 +114,88 @@ const faqs = [
 ];
 
 
+const abodeGalleryPhotos = [
+  {
+    image: receptionPhoto,
+    label: "A warm welcome",
+    category: "Spaces",
+  },
+  {
+    image: exteriorFront,
+    label: "Welcome to The Abode",
+    category: "Exterior",
+  },
+  {
+    image: anotherRoom,
+    label: "Rest in comfort",
+    category: "Rooms",
+  },
+  {
+    image: exteriorNight,
+    label: "The Abode after dark",
+    category: "Exterior",
+  },
+  {
+    image: prettyRoom,
+    label: "Thoughtfully designed",
+    category: "Rooms",
+  },
+  {
+    image: restaurant,
+    label: "Dining at The Abode",
+    category: "Dining",
+  },
+  {
+    image: exteriorSide,
+    label: "A different perspective",
+    category: "Exterior",
+  },
+  {
+    image: bathroom,
+    label: "Thoughtful details",
+    category: "Spaces",
+  },
+  {
+    image: room3,
+    label: "Make yourself at home",
+    category: "Rooms",
+  },
+  {
+    image: towelFoldRoom,
+    label: "Little touches of comfort",
+    category: "Rooms",
+  },
+  {
+    image: roomTv,
+    label: "Everyday comforts",
+    category: "Rooms",
+  },
+  {
+    image: roomNight,
+    label: "A peaceful evening",
+    category: "Rooms",
+  },
+  {
+    image: roomEntrance,
+    label: "Your space to unwind",
+    category: "Rooms",
+  },
+];
+
+const galleryCategories: string[] = [
+  "All Photos",
+  "Exterior",
+  "Rooms",
+  "Dining",
+  "Spaces",
+];
+
+
 function App() {
+  const [reviewModalOpen, setReviewModalOpen] = useState(false);
+  const [reviewRating, setReviewRating] = useState(0);
+  const [reviewName, setReviewName] = useState("");
+  const [reviewMessage, setReviewMessage] = useState("");
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [bookingStep, setBookingStep] = useState<"stay" | "details" | "summary">(
@@ -103,6 +203,9 @@ function App() {
   );
   
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+
+
+
  
 
   const [checkIn, setCheckIn] = useState("");
@@ -236,6 +339,46 @@ function App() {
       : [room3, room, room2]
   : [room, room2, room3];
 
+
+const [galleryOpen, setGalleryOpen] = useState(false);
+const [galleryCategory, setGalleryCategory] = useState("All Photos");
+const [galleryIndex, setGalleryIndex] = useState(0);
+
+const filteredGalleryPhotos =
+  galleryCategory === "All Photos"
+    ? abodeGalleryPhotos
+    : abodeGalleryPhotos.filter(
+        (photo) => photo.category === galleryCategory
+      );
+
+const openGallery = (photoIndex = 0) => {
+  setGalleryCategory("All Photos");
+  setGalleryIndex(photoIndex);
+  setGalleryOpen(true);
+};
+
+const closeGallery = () => {
+  setGalleryOpen(false);
+};
+
+const nextGalleryPhoto = () => {
+  setGalleryIndex((current) =>
+    (current + 1) % filteredGalleryPhotos.length
+  );
+};
+
+const previousGalleryPhoto = () => {
+  setGalleryIndex((current) =>
+    (current - 1 + filteredGalleryPhotos.length) %
+    filteredGalleryPhotos.length
+  );
+};
+
+const changeGalleryCategory = (category: string) => {
+  setGalleryCategory(category);
+  setGalleryIndex(0);
+};
+
   return (
     <main>
      
@@ -364,19 +507,23 @@ function App() {
 
 
       {/* HERO */}
-      <section id="home" className="hero">
+      <section
+  id="home"
+  className="hero"
+  style={{ backgroundImage: `url("${prettyRoom}")` }}
+>
         <div className="hero-overlay" />
 
         <div className="hero-content reveal">
           <h1>
-            Escape for a while,
-            <br />
-            without leaving
-            <br />
-            the comfort of
-            <br />
-            home behind.
-          </h1>
+  Escape for a while,
+  <br />
+  without leaving
+  <br />
+  the comfort of
+  <br />
+  <span className="hero-title-accent">home behind.</span>
+</h1>
 
           <p>
             A private retreat surrounded by nature, where you can slow
@@ -437,22 +584,27 @@ function App() {
 
       {/* STORY */}
       <section id="story" className="story-section">
-        <div className="story-image reveal">
-          <img src={room2} alt="The Abode interior" />
-        </div>
+  <div className="story-image reveal">
+    <img
+      src={exteriorSide}
+      alt="Side view of The Abode exterior"
+    />
+  </div>
 
         <div className="story-content reveal">
           <p className="section-label">OUR STORY</p>
 
           <h2>
-            A peaceful retreat
-            <br />
-            created from
-            <br />
-            the smallest
-            <br />
-            thoughtful details.
-          </h2>
+  A peaceful retreat
+  <br />
+  created from
+  <br />
+  the smallest
+  <br />
+  <span className="story-title-accent">
+    thoughtful details.
+  </span>
+</h2>
 
           <p>
             The Abode began with a simple wish: to create a place where
@@ -473,10 +625,10 @@ function App() {
           <p className="rooms-label">OUR ROOMS</p>
 
           <h2>
-            Choose the room made
-            <br />
-            for your kind of getaway.
-          </h2>
+  Choose the room made
+  <br />
+  for <span className="rooms-title-accent">your kind of getaway.</span>
+</h2>
         </div>
 
         <div className="rooms-grid">
@@ -536,15 +688,17 @@ function App() {
       </section>
 
       {/* THE ABODE GALLERY */}
+      
 <section id="gallery" className="abode-gallery-section">
   <div className="abode-gallery-heading reveal">
     <div>
       <p className="abode-gallery-label">GALLERY</p>
+
       <h2>
-        A glimpse of life
-        <br />
-        at The Abode.
-      </h2>
+  A <span className="gallery-title-accent">glimpse</span> of life
+  <br />
+  at <span className="gallery-title-accent">The Abode.</span>
+</h2>
     </div>
 
     <p className="abode-gallery-description">
@@ -553,30 +707,153 @@ function App() {
     </p>
   </div>
 
+  {/* SIX FEATURED PHOTOGRAPHS */}
   <div className="abode-gallery-grid">
-    {[
-  { image: receptionPhoto, label: "A warm welcome" },
-  { image: bathroom, label: "Thoughtful details" },
-  { image: restaurant, label: "Dining at The Abode" },
-  { image: room3, label: "Make yourself at home" },
-].map((photo, index) => (
+    {abodeGalleryPhotos.slice(0, 6).map((photo, index) => (
       <figure
         className={`abode-gallery-item abode-gallery-item-${index + 1} reveal`}
-        key={index}
+        key={photo.label}
       >
-        <img src={photo.image} alt={photo.label} loading="lazy" />
+        <button
+          type="button"
+          className="abode-gallery-image-button"
+          onClick={() => openGallery(index)}
+          aria-label={`View ${photo.label} in gallery`}
+        >
+          <img
+            src={photo.image}
+            alt={photo.label}
+            loading="lazy"
+          />
 
-        <figcaption>
-          <span>{photo.label}</span>
-          <ArrowUpRight size={18} strokeWidth={1.5} aria-hidden="true" />
-        </figcaption>
+          <figcaption>
+            <span>{photo.label}</span>
+            <ArrowUpRight
+              size={18}
+              strokeWidth={1.5}
+              aria-hidden="true"
+            />
+          </figcaption>
+        </button>
       </figure>
     ))}
   </div>
 
+  {/* VIEW FULL GALLERY BUTTON */}
+  <div className="abode-gallery-actions reveal">
+    <button
+      type="button"
+      className="abode-gallery-view-all"
+      onClick={() => openGallery()}
+    >
+      View All {abodeGalleryPhotos.length} Photos
+
+      <ArrowUpRight
+        size={18}
+        strokeWidth={1.6}
+        aria-hidden="true"
+      />
+    </button>
+  </div>
+
   <p className="abode-gallery-signature">
-    The Abode <span>— Redefined Hospitality</span>
+    The Abode, <span> 
+    Redefined Hospitality</span>
   </p>
+
+  {/* FULL GALLERY VIEWER */}
+  {galleryOpen && (
+    <div
+      className="abode-gallery-lightbox"
+      role="dialog"
+      aria-modal="true"
+      aria-label="The Abode photo gallery"
+    >
+      <div className="abode-gallery-lightbox-header">
+        <div>
+          <p className="abode-gallery-lightbox-eyebrow">
+            THE ABODE
+          </p>
+
+          <h3>Explore our spaces</h3>
+        </div>
+
+        <button
+          type="button"
+          className="abode-gallery-close"
+          onClick={closeGallery}
+          aria-label="Close gallery"
+        >
+          <X size={24} strokeWidth={1.5} />
+        </button>
+      </div>
+
+      {/* CATEGORY FILTERS */}
+      <div className="abode-gallery-filters">
+        {galleryCategories.map((category) => (
+          <button
+            key={category}
+            type="button"
+            className={
+              galleryCategory === category
+                ? "abode-gallery-filter active"
+                : "abode-gallery-filter"
+            }
+            onClick={() => changeGalleryCategory(category)}
+          >
+            {category}
+          </button>
+        ))}
+      </div>
+
+      {/* MAIN PHOTOGRAPH */}
+      <div className="abode-gallery-lightbox-content">
+        <button
+          type="button"
+          className="abode-gallery-prev"
+          onClick={previousGalleryPhoto}
+          aria-label="Previous photograph"
+        >
+          <ChevronLeft size={25} strokeWidth={1.5} />
+        </button>
+
+        <div className="abode-gallery-lightbox-image">
+          <img
+            src={filteredGalleryPhotos[galleryIndex].image}
+            alt={filteredGalleryPhotos[galleryIndex].label}
+          />
+        </div>
+
+        <button
+          type="button"
+          className="abode-gallery-next"
+          onClick={nextGalleryPhoto}
+          aria-label="Next photograph"
+        >
+          <ChevronRight size={25} strokeWidth={1.5} />
+        </button>
+      </div>
+
+      {/* PHOTO CAPTION AND COUNTER */}
+      <div className="abode-gallery-lightbox-footer">
+        <div>
+          <p className="abode-gallery-lightbox-caption">
+            {filteredGalleryPhotos[galleryIndex].label}
+          </p>
+
+          <span>
+            {filteredGalleryPhotos[galleryIndex].category}
+          </span>
+        </div>
+
+        <p className="abode-gallery-counter">
+          {String(galleryIndex + 1).padStart(2, "0")}
+          <span> / </span>
+          {String(filteredGalleryPhotos.length).padStart(2, "0")}
+        </p>
+      </div>
+    </div>
+  )}
 </section>
 
       {/* WHY THE ABODE */}
@@ -584,7 +861,9 @@ function App() {
         <div className="why-stay-header reveal">
           <p className="why-stay-label">WHY THE ABODE?</p>
 
-          <h2>Why guests love staying here</h2>
+         <h2>
+  Why guests <span className="why-stay-title-accent">love</span> staying here
+</h2>
         </div>
 
         <div className="why-stay-grid">
@@ -666,12 +945,12 @@ function App() {
       <p className="location-label">FIND THE ABODE</p>
 
       <h2>
-        Close to where you
-        <br />
-        want to go, far enough
-        <br />
-        away to feel peaceful.
-      </h2>
+  <span className="location-title-accent">Close</span> to where you
+  <br />
+  want to go, <span className="location-title-accent">far enough</span>
+  <br />
+  away to feel peaceful.
+</h2>
     </div>
 
     <p className="location-intro">
@@ -886,7 +1165,9 @@ function App() {
       THE ABODE EXPERIENCE
     </span>
 
-    <h2>Stories that began right here.</h2>
+    <h2>
+  Stories that began <span className="reviews-title-accent">right here.</span>
+</h2>
 
     <div className="reviews-subtitle">
       <span className="reviews-line"></span>
@@ -961,8 +1242,332 @@ function App() {
         </div>
       </div>
     </article>
-  </div>
+    </div>
+
+  <div className="reviews-actions reveal">
+  <p className="reviews-actions-heading">
+    Every stay has a story.
+  </p>
+
+  <p className="reviews-actions-description">
+    We would love to hear yours.
+  </p>
+
+  <button
+    type="button"
+    className="reviews-leave-button"
+    onClick={() => setReviewModalOpen(true)}
+  >
+    <span>Share Your Experience</span>
+
+    <span className="reviews-button-icon">
+      <ArrowUpRight size={18} strokeWidth={1.8} />
+    </span>
+  </button>
+
+  <span className="reviews-verification-note">
+    <ShieldCheck size={14} strokeWidth={1.7} />
+    For verified guests after their stay
+  </span>
+</div>
+
+
 </section>
+
+    {/* ==========================================
+    THE ABODE — VERIFIED GUEST REVIEW MODAL
+========================================== */}
+
+{reviewModalOpen &&
+  createPortal(
+    <div
+      className="review-modal-overlay"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) {
+          setReviewModalOpen(false);
+        }
+      }}
+    >
+      <div
+        className="review-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="review-modal-title"
+      >
+        {/* CLOSE BUTTON */}
+        <button
+          type="button"
+          className="review-modal-close"
+          onClick={() => setReviewModalOpen(false)}
+          aria-label="Close review form"
+        >
+          ×
+        </button>
+
+        {/* HEADING */}
+        <span className="review-modal-eyebrow">
+          THE ABODE EXPERIENCE
+        </span>
+
+        <h2 id="review-modal-title">
+  Your stay.{" "}
+  <span className="review-modal-title-accent">
+    Your story.
+  </span>
+</h2>
+
+        <p className="review-modal-intro">
+          Every stay has a story. We'd love to hear yours.
+        </p>
+
+        <div className="review-modal-divider" />
+
+        {/* GUEST NAME */}
+        <div className="review-modal-field">
+          <label htmlFor="review-name">
+            Your name
+          </label>
+
+          <input
+            id="review-name"
+            type="text"
+            placeholder="Your full name"
+            value={reviewName}
+            onChange={(event) =>
+              setReviewName(event.target.value)
+            }
+          />
+        </div>
+
+        {/* STAR RATING */}
+        <div className="review-modal-field">
+          <label>How was your stay?</label>
+
+          <div
+            className="review-modal-stars"
+            role="group"
+            aria-label="Rate your stay"
+          >
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                key={star}
+                type="button"
+                className={
+                  star <= reviewRating
+                    ? "review-modal-star selected"
+                    : "review-modal-star"
+                }
+                onClick={() => setReviewRating(star)}
+                aria-label={`Rate ${star} out of 5 stars`}
+                aria-pressed={reviewRating === star}
+              >
+                ★
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* REVIEW MESSAGE */}
+        <div className="review-modal-field">
+          <label htmlFor="review-message">
+            Your experience
+          </label>
+
+          <textarea
+            id="review-message"
+            rows={5}
+            placeholder="What made your stay memorable?"
+            value={reviewMessage}
+            onChange={(event) =>
+              setReviewMessage(event.target.value)
+            }
+          />
+        </div>
+
+        {/* VERIFICATION INFORMATION */}
+        <div className="review-modal-verification">
+          <span aria-hidden="true">✦</span>
+
+          <p>
+            To keep our guest stories authentic,
+            reviews can only be submitted through
+            a secure invitation sent after a
+            completed stay.
+          </p>
+        </div>
+
+        {/* SUBMIT BUTTON */}
+        <button
+          type="button"
+          className="review-modal-submit"
+          disabled
+          title="Available through a verified guest invitation"
+        >
+          Submit Review
+          <ArrowUpRight size={17} strokeWidth={1.7} aria-hidden="true" />
+        </button>
+
+        <p className="review-modal-footnote">
+          Review submissions will become available
+          once our verified guest system is connected.
+        </p>
+      </div>
+    </div>,
+    document.body
+  )}
+      
+
+      {/* ==========================================
+    THE ABODE — VERIFIED GUEST REVIEW MODAL
+========================================== */}
+
+{reviewModalOpen &&
+  createPortal(
+    <div
+      className="review-modal-overlay"
+      onMouseDown={(event) => {
+        if (event.target === event.currentTarget) {
+          setReviewModalOpen(false);
+        }
+      }}
+    >
+      <div
+        className="review-modal"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="review-modal-title"
+      >
+        {/* CLOSE BUTTON */}
+        <button
+          type="button"
+          className="review-modal-close"
+          onClick={() => setReviewModalOpen(false)}
+          aria-label="Close review form"
+        >
+          ×
+        </button>
+
+        {/* HEADING */}
+        <span className="review-modal-eyebrow">
+          THE ABODE EXPERIENCE
+        </span>
+
+        <h2 id="review-modal-title">
+          Tell us about your stay.
+        </h2>
+
+        <p className="review-modal-intro">
+  The little moments are often the ones we remember most.
+  Share what made your time at The Abode special.
+</p>
+
+        <div className="review-modal-divider" />
+
+        {/* GUEST NAME */}
+        <div className="review-modal-field">
+          <label htmlFor="review-name">
+            Your name
+          </label>
+
+          <input
+            id="review-name"
+            type="text"
+            placeholder="Your full name"
+            value={reviewName}
+            onChange={(event) =>
+              setReviewName(event.target.value)
+            }
+          />
+        </div>
+
+        {/* STAR RATING */}
+        <div className="review-modal-field">
+          <label>How was your stay?</label>
+
+          <div
+            className="review-modal-stars"
+            role="group"
+            aria-label="Rate your stay"
+          >
+            {[1, 2, 3, 4, 5].map((star) => (
+              <button
+                key={star}
+                type="button"
+                className={
+                  star <= reviewRating
+                    ? "review-modal-star selected"
+                    : "review-modal-star"
+                }
+                onClick={() => setReviewRating(star)}
+                aria-label={`Rate ${star} out of 5 stars`}
+                aria-pressed={reviewRating === star}
+              >
+                ★
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* REVIEW MESSAGE */}
+        <div className="review-modal-field">
+          <label htmlFor="review-message">
+            Your experience
+          </label>
+
+          <textarea
+            id="review-message"
+            rows={5}
+            placeholder="What made your stay memorable?"
+            value={reviewMessage}
+            onChange={(event) =>
+              setReviewMessage(event.target.value)
+            }
+          />
+        </div>
+
+        {/* VERIFICATION INFORMATION */}
+        <div className="review-modal-verification">
+          <span aria-hidden="true">✦</span>
+
+          <p>
+            To keep our guest stories authentic,
+            reviews can only be submitted through
+            a secure invitation sent after a
+            completed stay.
+          </p>
+        </div>
+
+        {/* SUBMIT BUTTON */}
+        <button
+          type="button"
+          className="review-modal-submit"
+          disabled
+          title="Available through a verified guest invitation"
+        >
+          Submit Review
+          <ArrowUpRight size={17} strokeWidth={1.7} aria-hidden="true" />
+        </button>
+
+        <p className="review-modal-footnote">
+          
+        </p>
+      </div>
+    </div>,
+    document.body
+  )}
+
+    {/* VERIFIED GUEST REVIEW MODAL */}
+    {reviewModalOpen &&
+      createPortal(
+        <div className="review-modal-overlay">
+          {/* Your review modal content goes here */}
+        </div>,
+        document.body
+      )}
+
+    {/* The next website section continues here */}
+
+      
 
 
 {/* QUERIES ANSWERED / FAQ */}
@@ -982,12 +1587,12 @@ function App() {
       </p>
 
       <div className="faq-image-wrap">
-        <img
-          src={room}
-          alt="Comfortable guest bedroom at The Abode"
-          loading="lazy"
-        />
-      </div>
+  <img
+    src={receptionPhoto}
+    alt="Welcoming reception area at The Abode"
+    loading="lazy"
+  />
+</div>
     </div>
 
     {/* RIGHT SIDE */}

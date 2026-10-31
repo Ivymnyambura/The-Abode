@@ -8,3 +8,11 @@ body,
 body {
   overflow-x: hidden;
 }
+/* THE ABODE — STORY HEADING ACCENT */
+
+.story-title-accent {
+  color: #eb4901;
+  font-style: italic;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}

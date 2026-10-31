@@ -5530,3 +5530,1132 @@ button:focus-visible {
     display: block;
   }
 }
+/* ==========================================
+   THE ABODE — GALLERY IMAGE POPUP
+========================================== */
+
+.abode-gallery-image-button {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: zoom-in;
+  text-align: left;
+  position: relative;
+  overflow: hidden;
+}
+
+.abode-gallery-image-button img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.abode-gallery-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(20, 15, 12, 0.96);
+  display: flex;
+  flex-direction: column;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+.abode-gallery-lightbox-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  color: #fff;
+}
+
+.abode-gallery-lightbox-eyebrow {
+  color: #f5a47d;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+}
+
+.abode-gallery-lightbox-header h3 {
+  font-size: clamp(22px, 3vw, 36px);
+  margin: 6px 0 0;
+  color: #fff;
+}
+
+.abode-gallery-close {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  z-index: 10001;
+  width: 38px;
+  height: 38px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.abode-gallery-close:hover {
+  background: #eb4901;
+  transform: rotate(90deg);
+}
+
+.abode-gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.abode-gallery-filter {
+  padding: 9px 15px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.abode-gallery-filter.active,
+.abode-gallery-filter:hover {
+  background: #eb4901;
+  border-color: #eb4901;
+}
+
+.abode-gallery-lightbox-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  flex: 1;
+  min-height: 0;
+}
+
+.abode-gallery-lightbox-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+  min-height: 0;
+}
+
+.abode-gallery-lightbox-image img {
+  display: block;
+  max-width: 100%;
+  max-height: 65vh;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.abode-gallery-prev,
+.abode-gallery-next {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: pointer;
+}
+
+.abode-gallery-prev:hover,
+.abode-gallery-next:hover {
+  background: #eb4901;
+}
+
+.abode-gallery-lightbox-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  color: #fff;
+  padding: 16px 0 4px;
+}
+
+.abode-gallery-lightbox-caption {
+  font-size: 17px;
+  color: #fff;
+  margin: 0;
+}
+
+.abode-gallery-lightbox-footer span {
+  color: #c5b9b2;
+  font-size: 12px;
+}
+
+.abode-gallery-counter {
+  color: #fff;
+  white-space: nowrap;
+}
+
+/* PHONE AND TABLET */
+@media (max-width: 768px) {
+  .abode-gallery-lightbox {
+    padding: 70px 14px 20px;
+  }
+
+  .abode-gallery-close {
+    top: 14px;
+    right: 14px;
+    width: 34px;
+    height: 34px;
+  }
+
+  .abode-gallery-lightbox-header h3 {
+    font-size: 23px;
+  }
+
+  .abode-gallery-filters {
+    gap: 7px;
+    margin: 16px 0;
+  }
+
+  .abode-gallery-filter {
+    padding: 8px 11px;
+    font-size: 12px;
+  }
+
+  .abode-gallery-lightbox-content {
+    gap: 6px;
+  }
+
+  .abode-gallery-prev,
+  .abode-gallery-next {
+    width: 32px;
+    height: 32px;
+  }
+
+  .abode-gallery-lightbox-image img {
+    max-height: 55vh;
+  }
+}
+
+/* =========================================
+   THE ABODE — VIEW ALL PHOTOS BUTTON
+========================================= */
+
+.abode-gallery-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 38px;
+  margin-bottom: 20px;
+}
+
+.abode-gallery-view-all {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+
+  padding: 16px 28px;
+  border: 1px solid #eb4901;
+  border-radius: 100px;
+
+  background: #eb4901;
+  color: #ffffff;
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.035em;
+
+  cursor: pointer;
+  transition:
+    background 0.25s ease,
+    color 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.abode-gallery-view-all:hover {
+  background: #c93d00;
+  border-color: #c93d00;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(235, 73, 1, 0.2);
+}
+
+.abode-gallery-view-all svg {
+  transition: transform 0.25s ease;
+}
+
+.abode-gallery-view-all:hover svg {
+  transform: translate(3px, -3px);
+}
+
+.abode-gallery-view-all:focus-visible {
+  outline: 3px solid #eb4901;
+  outline-offset: 4px;
+}
+
+@media (max-width: 768px) {
+  .abode-gallery-actions {
+    margin-top: 26px;
+  }
+
+  .abode-gallery-view-all {
+    width: min(100%, 320px);
+    padding: 15px 20px;
+  }
+}
+
+/* ==========================================
+   THE ABODE — GALLERY POPUP LAYOUT FIX
+   Prevent images overlapping category filters
+========================================== */
+
+.abode-gallery-lightbox {
+  display: flex;
+  flex-direction: column;
+  height: 100dvh;
+  box-sizing: border-box;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Keep category menu above the photographs */
+.abode-gallery-filters {
+  position: relative;
+  z-index: 5;
+  flex-shrink: 0;
+  margin: 22px 0 26px;
+  padding: 4px 0;
+}
+
+/* Give the photograph its own space */
+.abode-gallery-lightbox-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+
+  flex: 1 0 auto;
+  min-height: 320px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Keep the photograph inside its container */
+.abode-gallery-lightbox-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  min-width: 0;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.abode-gallery-lightbox-image img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(55dvh, 620px);
+  object-fit: contain;
+}
+
+/* Keep caption and counter below the image */
+.abode-gallery-lightbox-footer {
+  position: relative;
+  flex-shrink: 0;
+  margin-top: 20px;
+  padding-bottom: 16px;
+}
+
+/* TABLET */
+@media (max-width: 1024px) {
+  .abode-gallery-filters {
+    margin: 18px 0 22px;
+  }
+
+  .abode-gallery-lightbox-content {
+    min-height: 260px;
+  }
+
+  .abode-gallery-lightbox-image img {
+    max-height: 50dvh;
+  }
+}
+
+/* PHONE */
+@media (max-width: 600px) {
+  .abode-gallery-lightbox {
+    padding: 65px 14px 18px;
+  }
+
+  .abode-gallery-filters {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 14px 0 20px;
+  }
+
+  .abode-gallery-lightbox-content {
+    gap: 8px;
+    min-height: 200px;
+  }
+
+  .abode-gallery-lightbox-image img {
+    max-height: 42dvh;
+  }
+
+  .abode-gallery-lightbox-footer {
+    margin-top: 16px;
+  }
+}
+
+/* THE ABODE — PRETTY ROOM HERO */
+
+.hero {
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 1024px) {
+  .hero {
+    background-position: 55% center;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    background-position: 60% center;
+  }
+}
+/* THE ABODE — OUR STORY IMAGE POSITION */
+
+.story-image img {
+  object-position: center 25%;
+}
+
+/* ==========================================
+   THE ABODE — COMPACT GUEST REVIEWS
+========================================== */
+
+.reviews-section {
+  padding-top: 72px;
+  padding-bottom: 76px;
+}
+
+.reviews-header {
+  margin-bottom: 32px;
+}
+
+.reviews-header h2 {
+  font-size: clamp(28px, 3.2vw, 44px);
+}
+
+.review-card,
+.review-card.review-featured {
+  padding: 24px 26px;
+  min-height: 0;
+  height: auto;
+  box-sizing: border-box;
+}
+
+/* Featured review: smaller and centered */
+.review-card.review-featured {
+  max-width: 760px;
+  margin: 0 auto 18px;
+}
+
+/* Two smaller cards underneath */
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 760px;
+  margin: 0 auto;
+}
+
+.review-quote-mark {
+  font-size: 38px;
+  line-height: 1;
+}
+
+.review-stars {
+  font-size: 13px;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+}
+
+.review-card blockquote {
+  font-size: 14px;
+  line-height: 1.7;
+  margin: 10px 0 20px;
+}
+
+.review-author-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.review-author-avatar {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  font-size: 12px;
+}
+
+.review-author {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.review-author-label {
+  font-size: 10px;
+}
+
+/* TABLET */
+@media (max-width: 900px) {
+  .reviews-section {
+    padding-top: 60px;
+    padding-bottom: 64px;
+  }
+
+  .review-card,
+  .review-card.review-featured {
+    padding: 22px;
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .reviews-section {
+    padding-top: 52px;
+    padding-bottom: 56px;
+  }
+
+  .reviews-header {
+    margin-bottom: 24px;
+  }
+
+  .reviews-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .review-card,
+  .review-card.review-featured {
+    padding: 20px;
+  }
+
+  .review-card.review-featured {
+    margin-bottom: 14px;
+  }
+
+  .review-card blockquote {
+    font-size: 13px;
+    line-height: 1.65;
+  }
+}
+
+/* THE ABODE — LEAVE A REVIEW */
+
+.reviews-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin-top: 36px;
+  text-align: center;
+}
+
+.reviews-actions > p {
+  font-size: 14px;
+  margin: 0;
+}
+
+.reviews-leave-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 13px 25px;
+  border: 1px solid #eb4901;
+  border-radius: 999px;
+  background: #eb4901;
+  color: #fff;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.25s ease, transform 0.25s ease;
+}
+
+.reviews-leave-button:hover {
+  background: #c93d00;
+  transform: translateY(-2px);
+}
+
+.reviews-verification-note {
+  font-size: 11px;
+  opacity: 0.65;
+}
+
+@media (max-width: 600px) {
+  .reviews-actions {
+    margin-top: 26px;
+  }
+}
+
+/* ==========================================
+   THE ABODE — REVIEWS REFINEMENT
+========================================== */
+
+.reviews-section {
+  padding: 76px 6%;
+}
+
+/* HEADING */
+.reviews-header {
+  text-align: center;
+  margin-bottom: 38px;
+}
+
+.reviews-header h2 {
+  font-family: "Fraunces", serif;
+  font-size: clamp(30px, 3.5vw, 46px);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  margin: 12px 0 16px;
+  text-wrap: balance;
+}
+
+.reviews-eyebrow {
+  color: #eb4901;
+  letter-spacing: 0.18em;
+}
+
+.reviews-subtitle p {
+  font-size: 13px;
+  letter-spacing: 0.025em;
+  color: #81736a;
+}
+
+.reviews-line {
+  background: #eb4901;
+  opacity: 0.35;
+}
+
+/* BALANCED THREE-CARD LAYOUT */
+.reviews-section .review-card.review-featured,
+.reviews-section .reviews-grid {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+}
+
+.reviews-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  column-gap: 16px;
+  align-items: stretch;
+}
+
+.reviews-header,
+.reviews-actions {
+  grid-column: 1 / -1;
+}
+
+.reviews-section .reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.reviews-section .review-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  min-height: 0;
+  height: 100%;
+  padding: 23px 21px;
+  border: 1px solid rgba(235, 73, 1, 0.12);
+  border-radius: 12px;
+  box-sizing: border-box;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.reviews-section .review-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(235, 73, 1, 0.32);
+  box-shadow: 0 14px 32px rgba(90, 48, 23, 0.08);
+}
+
+/* SUBTLE ORANGE DETAIL */
+.reviews-section .review-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 22px;
+  width: 38px;
+  height: 2px;
+  background: #eb4901;
+  opacity: 0.65;
+  transition: width 0.3s ease;
+}
+
+.reviews-section .review-card:hover::before {
+  width: 75px;
+}
+
+/* REVIEW TEXT */
+.reviews-section .review-card blockquote {
+  font-family: "Manrope", sans-serif;
+  font-size: 12.5px;
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: -0.005em;
+  margin: 14px 0 22px;
+}
+
+/* STARS */
+.reviews-section .review-stars {
+  color: #eb4901;
+  margin-bottom: 8px;
+}
+
+/* AUTHOR */
+.reviews-section .review-author-row {
+  margin-top: auto;
+}
+
+.reviews-section .review-author {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.reviews-section .review-author-label {
+  font-size: 10px;
+  color: #9a8174;
+}
+
+.reviews-section .review-author-avatar {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  background: rgba(235, 73, 1, 0.09);
+  color: #eb4901;
+}
+
+/* BUTTON TRANSITION */
+.reviews-leave-button {
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.reviews-leave-button:hover {
+  box-shadow: 0 8px 22px rgba(235, 73, 1, 0.18);
+}
+
+/* TABLET */
+@media (max-width: 900px) {
+  .reviews-section {
+    grid-template-columns: 1fr;
+  }
+
+  .reviews-section .review-card.review-featured {
+    margin-bottom: 16px;
+  }
+
+  .reviews-section .reviews-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .reviews-section {
+    padding: 54px 6%;
+  }
+
+  .reviews-section .reviews-grid {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .reviews-section .review-card {
+    padding: 20px;
+  }
+
+  .reviews-section .review-card blockquote {
+    font-size: 12.5px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reviews-section .review-card,
+  .reviews-section .review-card::before,
+  .reviews-leave-button {
+    transition: none;
+  }
+}
+
+.reviews-title-accent {
+  color: #eb4901;
+  font-style: italic;
+  font-weight: 450;
+}
+
+/* ======================================
+   THE ABODE — ELEGANT REVIEW CTA
+====================================== */
+
+.reviews-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-top: 46px;
+  text-align: center;
+}
+
+.reviews-actions-heading {
+  margin: 0;
+  font-family: "Fraunces", serif;
+  font-size: clamp(20px, 2.5vw, 27px);
+  font-weight: 500;
+  color: #30241f;
+}
+
+.reviews-actions-description {
+  margin: 0 0 17px;
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  color: #8b776c;
+}
+
+/* MAIN BUTTON */
+
+.reviews-actions .reviews-leave-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+
+  min-width: 252px;
+  padding: 7px 7px 7px 23px;
+
+  background: #fffaf6;
+  border: 1px solid #e8c8b6;
+  border-radius: 100px;
+
+  color: #442b20;
+  font-family: "Manrope", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.015em;
+
+  cursor: pointer;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
+}
+
+/* CIRCULAR LUCIDE ARROW */
+
+.reviews-button-icon {
+  width: 37px;
+  height: 37px;
+  flex-shrink: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  background: #eb4901;
+  color: #ffffff;
+
+  transition:
+    transform 0.3s ease,
+    background 0.3s ease;
+}
+
+/* HOVER INTERACTION */
+
+.reviews-actions .reviews-leave-button:hover {
+  background: #fff0e6;
+  border-color: #eb4901;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px rgba(235, 73, 1, 0.11);
+}
+
+.reviews-leave-button:hover .reviews-button-icon {
+  transform: rotate(45deg);
+  background: #c93d00;
+}
+
+/* VERIFIED GUEST NOTE */
+
+.reviews-verification-note {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  margin-top: 11px;
+
+  font-family: "Manrope", sans-serif;
+  font-size: 10px;
+  color: #987968;
+}
+
+.reviews-verification-note svg {
+  color: #eb4901;
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+  .reviews-actions {
+    margin-top: 32px;
+  }
+
+  .reviews-actions .reviews-leave-button {
+    min-width: 0;
+    width: min(100%, 285px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reviews-actions .reviews-leave-button,
+  .reviews-button-icon {
+    transition: none;
+  }
+}
+
+/* THE ABODE — HERO TITLE ACCENT */
+
+.hero-title-accent {
+  color: #eb4901;
+  font-style: italic;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.rooms-title-accent {
+  color: #eb4901;
+  font-style: italic;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.gallery-title-accent {
+  color: #eb4901;
+  font-style: italic;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.why-stay-title-accent {
+  color: #eb4901;
+  font-style: italic;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.location-title-accent {
+  color: #eb4901;
+  font-style: italic;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+/* ==========================================
+   THE ABODE — VERIFIED GUEST BADGE
+========================================== */
+
+.reviews-actions .reviews-verification-note {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+
+  width: fit-content;
+  max-width: 100%;
+
+  margin-top: 12px;
+  padding: 10px 16px;
+
+  background: #fff1e7;
+  border: 1px solid #f2d5c4;
+  border-radius: 100px;
+
+  color: #674638;
+  font-family: "Manrope", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+
+  opacity: 1;
+  box-sizing: border-box;
+
+  transition:
+    background 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.reviews-actions .reviews-verification-note svg {
+  color: #eb4901;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.reviews-actions .reviews-verification-note:hover {
+  background: #ffe8d8;
+  border-color: #edbda4;
+}
+
+@media (max-width: 600px) {
+  .reviews-actions .reviews-verification-note {
+    padding: 9px 13px;
+    font-size: 10px;
+    text-align: center;
+  }
+}
+
+/* HERO IMAGE — ADJUSTABLE FOCAL POINT */
+
+.hero {
+  --hero-image-x: 75%;
+  background-position: var(--hero-image-x) center;
+}
+
+@media (max-width: 900px) {
+  .hero {
+    --hero-image-x: 65%;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero {
+    --hero-image-x: 60%;
+  }
+}
+
+/* ==========================================
+   THE ABODE — FINAL REVIEW POPUP POLISH
+========================================== */
+
+.review-modal {
+  border: 1px solid rgba(235, 73, 1, 0.12);
+  background: #fffaf6;
+  box-shadow: 0 30px 90px rgba(35, 22, 15, 0.22);
+  animation: reviewModalEnter 0.35s ease both;
+}
+
+.review-modal-title-accent {
+  color: #eb4901;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.review-modal-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background 0.25s ease,
+    transform 0.25s ease;
+}
+
+.review-modal-close:hover {
+  background: #f9dfce;
+  transform: rotate(90deg);
+}
+
+.review-modal-field input,
+.review-modal-field textarea {
+  background: #ffffff;
+  transition:
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.review-modal-field input:focus,
+.review-modal-field textarea:focus {
+  border-color: #eb4901;
+  box-shadow: 0 0 0 3px rgba(235, 73, 1, 0.08);
+}
+
+.review-modal-star:hover {
+  color: #eb4901;
+  transform: translateY(-2px) scale(1.08);
+}
+
+.review-modal-verification {
+  background: #fff1e7;
+  border-color: #f1d6c5;
+}
+
+.review-modal-submit {
+  border-radius: 999px;
+  min-height: 48px;
+}
+
+.review-modal-submit:disabled {
+  background: #e7b49a;
+  color: #ffffff;
+  opacity: 1;
+}
+
+@keyframes reviewModalEnter {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 600px) {
+  .review-modal {
+    padding: 28px 22px;
+  }
+
+  .review-modal h2 {
+    font-size: 29px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-modal {
+    animation: none;
+  }
+}
